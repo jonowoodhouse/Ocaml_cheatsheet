@@ -2,7 +2,7 @@
 
 View the [cheatsheet.ml](cheatsheet.ml) source code file for great examples of using Ocaml.
 
-```Ocaml
+```ocaml
 open Core
 
 let () = print_endline "hello world"
@@ -44,7 +44,7 @@ let () = print_endline "hello world"
 
 ## Dune
 in an empty folder:
-```Shell
+```shell
 	eval `opam config env`
 	dune init executable dune_example
 	dune build @all
