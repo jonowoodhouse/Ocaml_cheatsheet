@@ -3,6 +3,7 @@
 View the source code file cheatsheet.ml for great examples of using Ocaml.
 
 ## My OCaml programming environment
+- Note: Don't bother use Windows - much easier in Linux
 - [Ubuntu LTS](https://ubuntu.com/download/desktop)
 - [SpaceMacs](https://www.spacemacs.org/)
 - [OCaml](https://ocaml.org/) (and opam)
@@ -12,9 +13,13 @@ View the source code file cheatsheet.ml for great examples of using Ocaml.
 - [Real World Ocaml book](https://dev.realworldocaml.org/) 
 - [Installing OCaml](https://dev.realworldocaml.org/install.html) 
 
-## Opam
-	eval `opam config env`
+## Dune
+in an empty folder:
 
+	eval `opam config env`
+	dune init executable dune_example
+	dune build @all
+	_build/default/main.exe
 
 ## Other Tips
 - Other tips will go here
@@ -23,4 +28,6 @@ View the source code file cheatsheet.ml for great examples of using Ocaml.
 - [99 OCaml Problems](https://ocaml.org/learn/tutorials/99problems.html) 
 
 ## TODO
-- Opam
+- Opam install list
+- Test on a new Ubuntu environment
+- Spacemacs and installation instructions
