@@ -53,7 +53,7 @@ in an empty folder:
 
 ## Ocamlformat
 - Requires an empty ``.ocamformat`` file in the project folder
-- ``ocamlformat -i cheatsheet.ml`
+- ``ocamlformat -i cheatsheet.ml``
 
 ## Other Tips
 - Other cool tips will go here
