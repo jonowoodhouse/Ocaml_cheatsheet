@@ -1,0 +1,10 @@
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: true
+include:
+  - README.md
+  - LICENSE.txt
+  - ISSUE_TEMPLATE.md
+  - PULL_REQUEST_TEMPLATE.md
