@@ -1,0 +1,3 @@
+(executable
+ (name cheatsheet)
+ (libraries core))

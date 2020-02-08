@@ -1,0 +1,5 @@
+*.sh -crlf
+*.ml -crlf
+*.mli -crlf
+*.s -crlf
+dune -crlf
