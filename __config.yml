@@ -3,6 +3,7 @@ plugins:
 relative_links:
   enabled: true
   collections: true
+markdown: kramdown  
 include:
   - README.md
   - LICENSE.txt
