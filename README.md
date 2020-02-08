@@ -1,6 +1,6 @@
 # OCaml Cheatsheet
 
-View the [cheatsheet.ml](cheatsheet.ml) source code file for great examples of using Ocaml.
+View the [cheatsheet.ml](https://github.com/jonowoodhouse/Ocaml_cheatsheet/blob/master/cheatsheet.ml) source code file for great examples of using Ocaml.
 
 ```ocaml
 open Core
