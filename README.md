@@ -1,6 +1,6 @@
 # OCaml Cheatsheet
 
-View the source code file cheatsheet.ml for great examples of using Ocaml.
+View the [cheatsheet.ml](cheatsheet.ml) source code file for great examples of using Ocaml.
 
 ## My OCaml programming environment
 - Note: Don't bother use Windows - much easier in Linux
