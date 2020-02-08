@@ -18,5 +18,4 @@ let () = print_endline "hello world"
    functors
    phantom types
    async
-
 *)

@@ -13,6 +13,10 @@ View the source code file cheatsheet.ml for great examples of using Ocaml.
 - [Real World Ocaml book](https://dev.realworldocaml.org/) 
 - [Installing OCaml](https://dev.realworldocaml.org/install.html) 
 
+## Opam
+	# TODO: complete this list
+	opam install dune utop ocamlformat core async
+
 ## Dune
 in an empty folder:
 
@@ -21,8 +25,12 @@ in an empty folder:
 	dune build @all
 	_build/default/main.exe
 
+## Ocamlformat
+- Requires an empty ``.ocamformat`` file in the project folder
+- ``ocamlformat -i cheatsheet.ml`
+
 ## Other Tips
-- Other tips will go here
+- Other cool tips will go here
 
 ## Further Reading
 - [99 OCaml Problems](https://ocaml.org/learn/tutorials/99problems.html) 
