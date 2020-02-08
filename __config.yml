@@ -3,7 +3,8 @@ plugins:
 relative_links:
   enabled: true
   collections: true
-markdown: kramdown  
+markdown: kramdown
+highlighter: rouge
 include:
   - README.md
   - LICENSE.txt
