@@ -2,14 +2,26 @@ open Core
 
 let () = print_endline "hello world"
 
+let variable_example =
+  (* Variable example *)
+  let x = 5 in
+  let f = 9. (* float (no trailing zero required) *) in
+  let s = "a string" in
+  (* Annotated Variables *)
+  let y : int = 6 in
+  let (z : int) = 7 in
+  (* printing to the screen *)
+  printf "%d %d %d %f %s\n" x y z f s;
+  print_s [%message (s : string)];
+  (* printf !"%(string)" s *) (* TODO Add more*)
 
 
 (* TODO:
    Google Analytics and Home Page
 
    variables
-   printing to the screen
    annotated variables and return types
+   printing to the screen / print_s [%message]
    arguments
    records (022)
    modules (021 023)
@@ -43,4 +55,3 @@ let () = print_endline "hello world"
    Cool tricks
    Spacemacs commands
 *)
-

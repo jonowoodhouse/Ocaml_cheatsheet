@@ -42,7 +42,7 @@ let () = print_endline "hello world"
 
 ## Opam
 	# TODO: complete this list
-	opam install dune utop ocamlformat core async
+	opam install dune utop ocamlformat core async merlin
 
 ## Dune
 in an empty folder:
