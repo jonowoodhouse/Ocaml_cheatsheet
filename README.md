@@ -9,23 +9,40 @@ open Core
 
 let () = print_endline "hello world"
 
-(* TODO:
-   variables
-   records
-   tuples
-   variants
-   options
-   ref
-   List
-   set
-   hashtable
-   string
-   map + bind
-   modules
-   functors
-   phantom types
-   async
-*)
+let variables_example =
+  (* Variables example ------------- *)
+  let x = 5 in
+  let f = 9. (* float (no trailing zero required) *) in
+  let s = "a string" in
+
+  (* Annotated variables ------------ *)
+  let y : int = 6 in
+  let (z : int) = 7 in
+
+  (* Annoated return type - int is the type of calc *)
+  let calc x y s : int =
+    printf "A %s has %i lives\n" s (x + y);
+    x + y
+  in
+
+  (* printing to the screen ----------*)
+  printf "%d %d %d %f %s\n" x y z f s;
+  print_s [%message (s : string)];
+  print_s (String.sexp_of_t s);
+  (* This uses: https://github.com/janestreet/ppx_custom_printf*)
+  printf !"%{sexp:string} %{sexp#mach:string} %{String}\n" s s s;
+  let (_ : int) = calc 5 4 "cat" in
+
+  let rec fold list ~init ~accum =
+    match list with
+    | [] -> init
+    | hd :: tl -> fold tl ~init:(accum init hd) ~accum
+  in
+  (* anonymous function (fun keyword) *)
+  printf "%i\n" (fold [ 1; 2; 3 ] ~init:0 ~accum:(fun init elem -> init + elem));
+
+  (*  List.fold *)
+  printf "Done\n"
 
 ```
 

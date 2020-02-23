@@ -26,7 +26,18 @@ let variables_example =
   printf !"%{sexp:string} %{sexp#mach:string} %{String}\n" s s s;
   let (_ : int) = calc 5 4 "cat" in
 
+  let rec fold list ~init ~accum =
+    match list with
+    | [] -> init
+    | hd :: tl -> fold tl ~init:(accum init hd) ~accum
+  in
+  (* anonymous function (fun keyword) *)
+  printf "%i\n" (fold [ 1; 2; 3 ] ~init:0 ~accum:(fun init elem -> init + elem));
+
+  (*  List.fold *)
   printf "Done\n"
+
+let banana = printf "Done\n"
 
 (* printf !"%(string)" s *)
 (* TODO Add more*)
