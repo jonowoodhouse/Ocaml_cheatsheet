@@ -35,14 +35,16 @@ let variables_example =
     | [] -> init
     | hd :: tl -> fold tl ~init:(accum init hd) ~accum
   in
+
   (* anonymous function (fun keyword) ----- *)
   printf "%i\n" (fold [ 1; 2; 3 ] ~init:0 ~accum:(fun init elem -> init + elem))
 
-(* define some types *)
+(* types *)
 type contact = { name : string; mobile : string; birth_year : int }
 [@@deriving sexp]
 
 let records_example =
+  (* Records ------------------------------- *)
   let c = { name = "Adam"; mobile = "012345678"; birth_year = 1995 } in
   printf "%s %s %i\n" c.name c.mobile c.birth_year;
   printf !"%{sexp:contact}\n" c;
@@ -68,6 +70,7 @@ let records_example =
   let c1 = create_contact "James" "999999999" 1988 in
   print4 c1
 
+(* modules with records of type t *)
 module File = struct
   type t = { file_name : string; size : int; attributes : int }
   [@@deriving sexp]
@@ -77,6 +80,7 @@ module File = struct
 end
 
 let module_records_example =
+  (* records in modules ------------------- *)
   let create_directory_entry file_name size attributes =
     { File.file_name; size; attributes }
   in
@@ -89,14 +93,14 @@ let module_records_example =
   (* ppx uses File.to_string *)
   printf !"%{File} : is_small_file=%b\n" file (is_small_file file)
 
-(* printf !"%(string)" s *)
-(* TODO Add more*)
 
 (* TODO:
    Google Analytics and Home Page
+   (* TODO Add more*)
 
    records (022)
    modules (021 023)
+   default arguments and optional arguments
    tuples
    matching and function
    variants (004 024 025)
