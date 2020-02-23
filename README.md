@@ -29,6 +29,15 @@ let () = print_endline "hello world"
 
 ```
 
+## Compiling cheatsheet.ml
+- See My OCaml programming environment section below
+- from the shell run this in linux:
+```shell
+	eval `opam config env`
+	dune build @all
+	_build/default/cheatsheet.exe
+```	
+
 ## My OCaml programming environment
 - Note: Don't bother use Windows - much easier in Linux
 - [Ubuntu LTS](https://ubuntu.com/download/desktop)

@@ -1,5 +1,5 @@
 (executable
  (name cheatsheet)
- (libraries core)
+ (libraries core ppx_sexp_conv.runtime-lib)
  (preprocess (pps ppx_jane))
 )

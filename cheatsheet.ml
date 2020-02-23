@@ -2,19 +2,34 @@ open Core
 
 let () = print_endline "hello world"
 
-let variable_example =
-  (* Variable example *)
+let variables_example =
+  (* Variables example ------------- *)
   let x = 5 in
   let f = 9. (* float (no trailing zero required) *) in
   let s = "a string" in
-  (* Annotated Variables *)
+
+  (* Annotated variables ------------ *)
   let y : int = 6 in
   let (z : int) = 7 in
-  (* printing to the screen *)
+
+  (* Annoated return type - int is the type of calc *)
+  let calc x y s : int =
+    printf "A %s has %i lives\n" s (x + y);
+    x + y
+  in
+
+  (* printing to the screen ----------*)
   printf "%d %d %d %f %s\n" x y z f s;
   print_s [%message (s : string)];
-  (* printf !"%(string)" s *) (* TODO Add more*)
+  print_s (String.sexp_of_t s);
+  (* This uses: https://github.com/janestreet/ppx_custom_printf*)
+  printf !"%{sexp:string} %{sexp#mach:string} %{String}\n" s s s;
+  let (_ : int) = calc 5 4 "cat" in
 
+  printf "Done\n"
+
+(* printf !"%(string)" s *)
+(* TODO Add more*)
 
 (* TODO:
    Google Analytics and Home Page
