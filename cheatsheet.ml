@@ -136,13 +136,14 @@ let module_records_example2 =
    Google Analytics and Home Page
    (* TODO Add more*)
 
-   [ ] record deconstruction
-   [ ] record construction
+   [x] record deconstruction
+   [x] record construction
+   [ ] destructive substitution
    [ ]
    [ ]
    [ ]
-   [ ] records (022)
-   [ ] modules (021 023)
+   [x] records (022)
+   [x] modules (021 023)
    [ ] default arguments and optional arguments
    [ ] tuples
    [ ] matching and function

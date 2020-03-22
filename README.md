@@ -37,7 +37,7 @@ let variables_example =
   let f ~a:renamed_a = renamed_a * 2 in
 
   (* ------------------------------------------------------------
-     Printing to the screen 
+     Printing to the screen
      ------------------------------------------------------------ *)
   printf "%d %d %d %f %s %i\n" x y z real s (f ~a:50);
   print_s [%message "Description" (s : string)];
@@ -61,20 +61,26 @@ let variables_example =
   printf "%i\n" (fold [ 1; 2; 3 ] ~init:0 ~accum:(fun init elem -> init + elem))
 
 (* types *)
+(* ------------------------------------------------------------
+   Records - Construction, destruction, annotation and renaming
+   ------------------------------------------------------------ *)
 type contact = { name : string; mobile : string; birth_year : int }
 [@@deriving sexp]
 
 let records_example =
   (* ------------------------------------------------------------
-     Records
+     Records - Construction, destruction, annotation and renaming
      ------------------------------------------------------------ *)
+  (* record construction *)
   let c = { name = "Adam"; mobile = "012345678"; birth_year = 1995 } in
   printf "%s %s %i\n" c.name c.mobile c.birth_year;
   printf !"%{sexp:contact}\n" c;
+  let create_contact name mobile birth_year = { name; mobile; birth_year } in
+  let c2 = create_contact "James" "999999999" 1988 in
   (* Use dot notation *)
   let print1 x = printf "%s %s %i\n" x.name x.mobile x.birth_year in
   (* Use record deconstruction *)
-  let print2 { name; mobile; birth_year } =
+  let print2 { name; mobile; birth_year } (* much better *) =
     printf "%s %s %i\n" name mobile birth_year
   in
   (* use argument renaming and annotated variable *)
@@ -89,9 +95,7 @@ let records_example =
   print1 c;
   print2 c;
   print3 c;
-  let create_contact name mobile birth_year = { name; mobile; birth_year } in
-  let c1 = create_contact "James" "999999999" 1988 in
-  print4 c1
+  print4 c2
 
 (* modules with records of type t *)
 module File = struct
@@ -118,27 +122,42 @@ let module_records_example =
   (* ppx uses File.to_string *)
   printf !"%{File} : is_small_file=%b\n" file (is_small_file file)
 
+(* ------------------------------------------------------------
+   Records in modules. 2nd example
+   ------------------------------------------------------------ *)
+module Price = struct
+  type t = { x : float }
+
+  let create x = { x }
+end
+
+let module_records_example2 =
+  let price1 = Price.create 5.50 in
+  let (price2 : Price.t) = { x = 6.50 } in
+  (ignore price1, price2)
+
 ```
 
 ## OCaml Terminology
-
-| Term                  	| Definition                                                                                                                                     	|
-|-----------------------	|------------------------------------------------------------------------------------------------------------------------------------------------	|
-| applicative           	| Some modules aren't quite monads. They have a [map] function like a Monad but not a [bind] function. [Command] is an example of a Applicative. 	|
-| type parameter        	| ['a] is a type parameter. Also known as a type variable. Forms a paramaterised type in a 'a pair.                                              	|
-| variant               	| `type color = &#124; Red &#124; Green &#124; Blue`                                                                                             	|
-| polymorphic variant   	| <code>`Red `Green `Blue</code> etc.                                                                                                            	|
-| record type           	| `module Foo = struct`</br> `  type t = {bar : int; baz : string }`</br> `end`</br>                                                             	|
-| record                	| A bit like a struct in C.</br> `type person = {age : int; name : string}`                                                                      	|
-| high order functions  	| Functions that take other functions as arguments or return functions                                                                           	|
-| polymorphic functions 	| functions that act over values with many different types. Similar to templates in C++ and Generics in C# and Java                              	|
-|                       	|                                                                                                                                                	|
-|                       	|                                                                                                                                                	|
-|                       	|                                                                                                                                                	|
-|                       	|                                                                                                                                                	|
-|                       	|                                                                                                                                                	|
-
-
+| Term                            	| Definition                                                                                                                                     	|
+|---------------------------------	|------------------------------------------------------------------------------------------------------------------------------------------------	|
+| annonymouse function            	| `fun i -> 2 * i`                                                                                                                               	|
+| applicative                     	| Some modules aren't quite monads. They have a [map] function like a Monad but not a [bind] function. [Command] is an example of a Applicative. 	|
+| capitalisation                  	| Modules are Capitalised. functions and values are not.                                                                                         	|
+| destructive substitution        	| with type t:=t (TODO explain more)                                                                                                             	|
+| early binding                   	| runs at app start e.g. `let two_pi = 2.0 *. Float.pi`                                                                                          	|
+| first-order functions           	| Functions that operate on normal data elements (e.g. ints, strings, records, variants etc.) See also high-order functions.                     	|
+| high-order functions            	| Functions that take other functions as arguments or return functions. See also first-order functions                                           	|
+| identity function               	| `Fn.id`                                                                                                                                        	|
+| interface, signature, module type	| are all used interchangeably                                                                                                                   	|
+| polymorphic functions           	| functions that act over values with many different types. Similar to templates in C++ and Generics in C# and Java                              	|
+| record                          	| A bit like a struct in C.</br> `type person = {age : int; name : string}`                                                                      	|
+| record type                     	| A record inside a module. `module Foo = struct`</br> `  type t = {bar : int; baz : string }`</br> `end`</br>                                     	|
+| type parameter                  	| ['a] is a type parameter. Also known as a type variable. Forms a paramaterised type in a 'a pair.                                              	|
+| val                             	| used in signatures, module signatures or in .mli files                                                                                         	|
+| variant                         	| type color = &#124; Red &#124; Green &#124; Blue                                                                                               	|
+| variant - polymorphic variant    	| \`Red \`Green \`Blue etc.                                                                                                                      	|
+|                                 	|                                                                                                                                                	|
 
 
 
