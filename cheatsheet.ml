@@ -3,40 +3,54 @@ open Core
 let () = print_endline "hello world"
 
 let variables_example =
-  (* Variables example -------------------- *)
+  (* ------------------------------------------------------------
+     Variables
+     ------------------------------------------------------------ *)
   let x = 5 in
   let real = 9. (* float (no trailing zero required) *) in
   let s = "a string" in
 
-  (* Annotated variables ------------------ *)
+  (* ------------------------------------------------------------
+     Annotated variables
+     ------------------------------------------------------------ *)
   let y : int = 6 in
   let (z : int) = 7 in
 
-  (* Annoated return type - int is the type of calc *)
+  (* ------------------------------------------------------------
+     Annotated return type - [calc] returns an int
+     ------------------------------------------------------------ *)
   let calc x y s : int =
     printf "A %s has %i lives\n" s (x + y);
     x + y
   in
 
-  (* Renaming arguments ------------------- *)
+  (* ------------------------------------------------------------
+     Renaming arguments
+     ------------------------------------------------------------ *)
   let f ~a:renamed_a = renamed_a * 2 in
 
-  (* printing to the screen --------------- *)
+  (* ------------------------------------------------------------
+     Printing to the screen 
+     ------------------------------------------------------------ *)
   printf "%d %d %d %f %s %i\n" x y z real s (f ~a:50);
-  print_s [%message (s : string)];
+  print_s [%message "Description" (s : string)];
   print_s (String.sexp_of_t s);
   (* This uses: https://github.com/janestreet/ppx_custom_printf*)
   printf !"%{sexp:string} %{sexp#mach:string} %{String}\n" s s s;
   let (_ : int) = calc 5 4 "cat" in
 
-  (* recursion ---------------------------- *)
+  (* ------------------------------------------------------------
+     Recursion
+     ------------------------------------------------------------ *)
   let rec fold list ~init ~accum =
     match list with
     | [] -> init
     | hd :: tl -> fold tl ~init:(accum init hd) ~accum
   in
 
-  (* anonymous function (fun keyword) ----- *)
+  (* ------------------------------------------------------------
+     Anonymous function (fun keyword)
+     ------------------------------------------------------------ *)
   printf "%i\n" (fold [ 1; 2; 3 ] ~init:0 ~accum:(fun init elem -> init + elem))
 
 (* types *)
@@ -44,7 +58,9 @@ type contact = { name : string; mobile : string; birth_year : int }
 [@@deriving sexp]
 
 let records_example =
-  (* Records ------------------------------- *)
+  (* ------------------------------------------------------------
+     Records
+     ------------------------------------------------------------ *)
   let c = { name = "Adam"; mobile = "012345678"; birth_year = 1995 } in
   printf "%s %s %i\n" c.name c.mobile c.birth_year;
   printf !"%{sexp:contact}\n" c;
@@ -80,7 +96,9 @@ module File = struct
 end
 
 let module_records_example =
-  (* records in modules ------------------- *)
+  (* ------------------------------------------------------------
+     Records in modules
+     ------------------------------------------------------------ *)
   let create_directory_entry file_name size attributes =
     { File.file_name; size; attributes }
   in
@@ -93,7 +111,9 @@ let module_records_example =
   (* ppx uses File.to_string *)
   printf !"%{File} : is_small_file=%b\n" file (is_small_file file)
 
-
+  (* ------------------------------------------------------------
+     
+     ------------------------------------------------------------ *)
 (* TODO:
    Google Analytics and Home Page
    (* TODO Add more*)
