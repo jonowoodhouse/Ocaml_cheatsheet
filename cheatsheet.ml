@@ -43,9 +43,7 @@ let variables_example =
      Recursion
      ------------------------------------------------------------ *)
   let rec fold list ~init ~accum =
-    match list with
-    | [] -> init
-    | hd :: tl -> fold tl ~init:(accum init hd) ~accum
+    match list with [] -> init | hd :: tl -> fold tl ~init:(accum init hd) ~accum
   in
 
   (* ------------------------------------------------------------
@@ -53,17 +51,12 @@ let variables_example =
      ------------------------------------------------------------ *)
   printf "%i\n" (fold [ 1; 2; 3 ] ~init:0 ~accum:(fun init elem -> init + elem))
 
-(* types *)
 (* ------------------------------------------------------------
    Records - Construction, destruction, annotation and renaming
    ------------------------------------------------------------ *)
-type contact = { name : string; mobile : string; birth_year : int }
-[@@deriving sexp]
+type contact = { name : string; mobile : string; birth_year : int } [@@deriving sexp]
 
 let records_example =
-  (* ------------------------------------------------------------
-     Records - Construction, destruction, annotation and renaming
-     ------------------------------------------------------------ *)
   (* record construction *)
   let c = { name = "Adam"; mobile = "012345678"; birth_year = 1995 } in
   printf "%s %s %i\n" c.name c.mobile c.birth_year;
@@ -73,13 +66,9 @@ let records_example =
   (* Use dot notation *)
   let print1 x = printf "%s %s %i\n" x.name x.mobile x.birth_year in
   (* Use record deconstruction *)
-  let print2 { name; mobile; birth_year } (* much better *) =
-    printf "%s %s %i\n" name mobile birth_year
-  in
+  let print2 { name; mobile; birth_year } (* much better *) = printf "%s %s %i\n" name mobile birth_year in
   (* use argument renaming and annotated variable *)
-  let print3 ({ name; mobile; birth_year = b } : contact) =
-    printf "%s %s %i\n" name mobile b
-  in
+  let print3 ({ name; mobile; birth_year = b } : contact) = printf "%s %s %i\n" name mobile b in
   let print4 c =
     (* use record deconstruction *)
     let { name = n; mobile = m; birth_year } = c in
@@ -90,22 +79,17 @@ let records_example =
   print3 c;
   print4 c2
 
-(* modules with records of type t *)
+(* ------------------------------------------------------------
+   Record Types - records (types) in modules
+   ------------------------------------------------------------ *)
 module File = struct
-  type t = { file_name : string; size : int; attributes : int }
-  [@@deriving sexp]
+  type t = { file_name : string; size : int; attributes : int } [@@deriving sexp]
 
-  let to_string t =
-    if t.attributes > 700 then String.uppercase t.file_name else t.file_name
+  let to_string t = if t.attributes > 700 then String.uppercase t.file_name else t.file_name
 end
 
-let module_records_example =
-  (* ------------------------------------------------------------
-     Records in modules
-     ------------------------------------------------------------ *)
-  let create_directory_entry file_name size attributes =
-    { File.file_name; size; attributes }
-  in
+let record_types_example1 =
+  let create_directory_entry file_name size attributes = { File.file_name; size; attributes } in
   let is_small_file file =
     let { File.file_name = _; size; attributes = _ } = file in
     size < 1000
@@ -116,7 +100,7 @@ let module_records_example =
   printf !"%{File} : is_small_file=%b\n" file (is_small_file file)
 
 (* ------------------------------------------------------------
-   Records in modules. 2nd example
+   Record Types - 2nd example
    ------------------------------------------------------------ *)
 module Price = struct
   type t = { x : float }
@@ -124,10 +108,21 @@ module Price = struct
   let create x = { x }
 end
 
-let module_records_example2 =
+let record_types_example2 =
   let price1 = Price.create 5.50 in
   let (price2 : Price.t) = { x = 6.50 } in
   (ignore price1, price2)
+
+(* ------------------------------------------------------------
+   Default arguments, named parameters and optional arguments
+   ------------------------------------------------------------ *)
+let arguments_example =
+  (* by is optional but resolves to type int (not opional int)*)
+  let increment ?(by = 1) x = x + by in
+  let inc ?by x = match by with None -> x + 1 | Some by -> x + by in
+  let incr ~by x = x + by in
+  printf "0 inc = %d %d %d\n" (increment 0) (inc 0) (incr 0 ~by:1);
+  printf "0 inc by 2 = %d %d %d %d\n" (increment 0 ~by:2) (inc 0 ~by:2) (inc 0 ?by:(Some 2)) (incr 0 ~by:2)
 
 (* ------------------------------------------------------------
 
