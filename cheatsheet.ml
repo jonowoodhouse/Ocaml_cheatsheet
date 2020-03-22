@@ -128,6 +128,19 @@ let arguments_example =
     (incr 0 ~by:2)
 
 (* ------------------------------------------------------------
+   Tuples/Pairs (often better to use a record though)
+   Open modules
+   ------------------------------------------------------------ *)
+let tuples_example =
+  let gps_position latitude longitude = (latitude, longitude) in
+  let sydney = gps_position (-33.865143) 151.209900 in
+  let google_maps gps =
+    let open Float in
+    "https://www.google.com/maps/search/" ^ to_string (fst gps) ^ "," ^ to_string (snd gps) ^ "/"
+  in
+  printf "Google Maps URL for Sydney is %s\n" (google_maps sydney)
+
+(* ------------------------------------------------------------
 
    ------------------------------------------------------------ *)
 (* TODO:
@@ -142,8 +155,8 @@ let arguments_example =
    [ ]
    [x] records (022)
    [x] modules (021 023)
-   [ ] default arguments and optional arguments
-   [ ] tuples
+   [x] default arguments and optional arguments
+   [x] tuples
    [ ] matching and function
    [ ] variants (004 024 025)
    [ ] polymorphic variants

@@ -5,6 +5,7 @@
 View the [cheatsheet.ml](https://github.com/jonowoodhouse/Ocaml_cheatsheet/blob/master/cheatsheet.ml) source code file for great examples of using Ocaml.
 
 ```ocaml
+
 open Core
 
 let () = print_endline "hello world"
@@ -73,7 +74,9 @@ let records_example =
   (* Use dot notation *)
   let print1 x = printf "%s %s %i\n" x.name x.mobile x.birth_year in
   (* Use record deconstruction *)
-  let print2 { name; mobile; birth_year } (* much better *) = printf "%s %s %i\n" name mobile birth_year in
+  let print2 { name; mobile; birth_year } (* much better *) =
+    printf "%s %s %i\n" name mobile birth_year
+  in
   (* use argument renaming and annotated variable *)
   let print3 ({ name; mobile; birth_year = b } : contact) = printf "%s %s %i\n" name mobile b in
   let print4 c =
@@ -129,7 +132,22 @@ let arguments_example =
   let inc ?by x = match by with None -> x + 1 | Some by -> x + by in
   let incr ~by x = x + by in
   printf "0 inc = %d %d %d\n" (increment 0) (inc 0) (incr 0 ~by:1);
-  printf "0 inc by 2 = %d %d %d %d\n" (increment 0 ~by:2) (inc 0 ~by:2) (inc 0 ?by:(Some 2)) (incr 0 ~by:2)
+  printf "0 inc by 2 = %d %d %d %d\n" (increment 0 ~by:2) (inc 0 ~by:2) (inc 0 ?by:(Some 2))
+    (incr 0 ~by:2)
+
+(* ------------------------------------------------------------
+   Tuples/Pairs (often better to use a record though)
+   Open modules
+   ------------------------------------------------------------ *)
+let tuples_example =
+  let gps_position latitude longitude = (latitude, longitude) in
+  let sydney = gps_position (-33.865143) 151.209900 in
+  let google_maps gps =
+    let open Float in
+    "https://www.google.com/maps/search/" ^ to_string (fst gps) ^ "," ^ to_string (snd gps) ^ "/"
+  in
+  printf "Google Maps URL for Sydney is %s\n" (google_maps sydney)
+
 
 
 ```
