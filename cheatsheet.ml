@@ -30,7 +30,7 @@ let variables_example =
   let f ~a:renamed_a = renamed_a * 2 in
 
   (* ------------------------------------------------------------
-     Printing to the screen 
+     Printing to the screen
      ------------------------------------------------------------ *)
   printf "%d %d %d %f %s %i\n" x y z real s (f ~a:50);
   print_s [%message "Description" (s : string)];
@@ -54,20 +54,26 @@ let variables_example =
   printf "%i\n" (fold [ 1; 2; 3 ] ~init:0 ~accum:(fun init elem -> init + elem))
 
 (* types *)
+(* ------------------------------------------------------------
+   Records - Construction, destruction, annotation and renaming
+   ------------------------------------------------------------ *)
 type contact = { name : string; mobile : string; birth_year : int }
 [@@deriving sexp]
 
 let records_example =
   (* ------------------------------------------------------------
-     Records
+     Records - Construction, destruction, annotation and renaming
      ------------------------------------------------------------ *)
+  (* record construction *)
   let c = { name = "Adam"; mobile = "012345678"; birth_year = 1995 } in
   printf "%s %s %i\n" c.name c.mobile c.birth_year;
   printf !"%{sexp:contact}\n" c;
+  let create_contact name mobile birth_year = { name; mobile; birth_year } in
+  let c2 = create_contact "James" "999999999" 1988 in
   (* Use dot notation *)
   let print1 x = printf "%s %s %i\n" x.name x.mobile x.birth_year in
   (* Use record deconstruction *)
-  let print2 { name; mobile; birth_year } =
+  let print2 { name; mobile; birth_year } (* much better *) =
     printf "%s %s %i\n" name mobile birth_year
   in
   (* use argument renaming and annotated variable *)
@@ -82,9 +88,7 @@ let records_example =
   print1 c;
   print2 c;
   print3 c;
-  let create_contact name mobile birth_year = { name; mobile; birth_year } in
-  let c1 = create_contact "James" "999999999" 1988 in
-  print4 c1
+  print4 c2
 
 (* modules with records of type t *)
 module File = struct
@@ -111,15 +115,29 @@ let module_records_example =
   (* ppx uses File.to_string *)
   printf !"%{File} : is_small_file=%b\n" file (is_small_file file)
 
-  (* ------------------------------------------------------------
-     
-     ------------------------------------------------------------ *)
+(* ------------------------------------------------------------
+   Records in modules. 2nd example
+   ------------------------------------------------------------ *)
+module Price = struct
+  type t = { x : float }
+
+  let create x = { x }
+end
+
+let module_records_example2 =
+  let price1 = Price.create 5.50 in
+  let (price2 : Price.t) = { x = 6.50 } in
+  (ignore price1, price2)
+
+(* ------------------------------------------------------------
+
+   ------------------------------------------------------------ *)
 (* TODO:
    Google Analytics and Home Page
    (* TODO Add more*)
 
    [ ] record deconstruction
-   [ ]
+   [ ] record construction
    [ ]
    [ ]
    [ ]
@@ -156,4 +174,3 @@ let module_records_example =
    [ ] Cool tricks
    [ ] Spacemacs commands
 *)
- 
