@@ -155,7 +155,7 @@ let tuples_example =
 ## OCaml Terminology
 | Term                            	| Definition                                                                                                                                     	|
 |---------------------------------	|------------------------------------------------------------------------------------------------------------------------------------------------	|
-| annonymouse function            	| `fun i -> 2 * i`                                                                                                                               	|
+| annonymous function            	| `fun i -> 2 * i`                                                                                                                               	|
 | applicative                     	| Some modules aren't quite monads. They have a [map] function like a Monad but not a [bind] function. [Command] is an example of a Applicative. 	|
 | capitalisation                  	| Modules are Capitalised. functions and values are not.                                                                                         	|
 | destructive substitution        	| with type t:=t (TODO explain more)                                                                                                             	|
