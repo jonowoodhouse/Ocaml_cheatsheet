@@ -66,7 +66,9 @@ let records_example =
   (* Use dot notation *)
   let print1 x = printf "%s %s %i\n" x.name x.mobile x.birth_year in
   (* Use record deconstruction *)
-  let print2 { name; mobile; birth_year } (* much better *) = printf "%s %s %i\n" name mobile birth_year in
+  let print2 { name; mobile; birth_year } (* much better *) =
+    printf "%s %s %i\n" name mobile birth_year
+  in
   (* use argument renaming and annotated variable *)
   let print3 ({ name; mobile; birth_year = b } : contact) = printf "%s %s %i\n" name mobile b in
   let print4 c =
@@ -122,7 +124,8 @@ let arguments_example =
   let inc ?by x = match by with None -> x + 1 | Some by -> x + by in
   let incr ~by x = x + by in
   printf "0 inc = %d %d %d\n" (increment 0) (inc 0) (incr 0 ~by:1);
-  printf "0 inc by 2 = %d %d %d %d\n" (increment 0 ~by:2) (inc 0 ~by:2) (inc 0 ?by:(Some 2)) (incr 0 ~by:2)
+  printf "0 inc by 2 = %d %d %d %d\n" (increment 0 ~by:2) (inc 0 ~by:2) (inc 0 ?by:(Some 2))
+    (incr 0 ~by:2)
 
 (* ------------------------------------------------------------
 
