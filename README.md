@@ -121,15 +121,14 @@ let module_records_example =
 ```
 
 ## OCaml Terminology
-
 | Term                	| Definition                                                                                                                                     	|
 |---------------------	|------------------------------------------------------------------------------------------------------------------------------------------------	|
 | applicative         	| Some modules aren't quite monads. They have a [map] function like a Monad but not a [bind] function. [Command] is an example of a Applicative. 	|
 | type parameter      	| ['a] is a type parameter. Also known as a type variable. Forms a paramaterised type in a 'a pair.                                              	|
-| variant             	| type color = | Red | Green | Blue                                                                                                              	|
-| polymorphic variant 	| `Red `Green `Blue etc.                                                                                                                         	|
-| record type         	| module Foo = struct    type t = {bar : int; baz : string } end                                                                                 	|
-| record              	| A bit like a struct in C.  type person = {age : int; name : string}                                                                            	|
+| variant             	| `type color = \| Red \| Green \| Blue`                                                                                                         	|
+| polymorphic variant 	| <code>`Red `Green `Blue</code> etc.                                                                                                            	|
+| record type         	| `module Foo = struct`</br> `  type t = {bar : int; baz : string }`</br> `end`</br>                                                             	|
+| record              	| A bit like a struct in C.</br> `type person = {age : int; name : string}`                                                                      	|
 |                     	|                                                                                                                                                	|
 |                     	|                                                                                                                                                	|
 |                     	|                                                                                                                                                	|
