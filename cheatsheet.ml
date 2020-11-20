@@ -28,6 +28,7 @@ let variables_example =
      Renaming arguments
      ------------------------------------------------------------ *)
   let f ~a:renamed_a = renamed_a * 2 in
+  let f ~a:(renamed_and_annotated:int) = f renamed_and_annotated in
 
   (* ------------------------------------------------------------
      Printing to the screen
